@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function ownsSet(setId) {
+      return signedIn() &&
+        get(/databases/$(database)/documents/sets/$(setId)).data.ownerId == request.auth.uid;
+    }
+
+    match /users/{uid} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+    }
+
+    match /sets/{setId} {
+      allow create: if signedIn() && request.resource.data.ownerId == request.auth.uid;
+      allow read, update, delete: if signedIn() && resource.data.ownerId == request.auth.uid;
+
+      match /quiz/{questionId} {
+        allow read, write: if ownsSet(setId);
+      }
+
+      match /cards/{cardId} {
+        allow read, write: if ownsSet(setId);
+      }
+    }
+
+    match /progress/{progressId} {
+      allow read, write: if signedIn() &&
+        progressId.matches('^' + request.auth.uid + '_.*');
+    }
+  }
+}

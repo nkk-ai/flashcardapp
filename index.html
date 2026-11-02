@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LearnKit — Files into quizzes and flashcards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body data-page="landing">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="mark">LK</span>
+        <strong>LearnKit</strong>
+      </a>
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="#auth">Sign in</a>
+      </div>
+    </header>
+
+    <div class="status-banner" data-banner></div>
+
+    <main class="hero">
+      <section>
+        <h1>Turn notes into a quiz you can actually study.</h1>
+        <p class="lede">
+          Upload a PDF, Word doc, or text file. LearnKit reads it, then builds a multiple-choice quiz
+          and a flashcard deck so you can review instead of reread.
+        </p>
+        <div class="steps">
+          <div class="step">
+            <b>1. Drop in a file</b>
+            <span class="muted">PDF, DOCX, TXT, or Markdown — your lecture notes or a chapter export.</span>
+          </div>
+          <div class="step">
+            <b>2. Gemini writes the practice set</b>
+            <span class="muted">Ten questions with explanations, plus a deck of key cards.</span>
+          </div>
+          <div class="step">
+            <b>3. Study and track what stuck</b>
+            <span class="muted">Quiz scores and “still learning” cards save to your Firebase library.</span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="auth-card" id="auth">
+        <h2>Start studying</h2>
+        <p class="muted">Create a free account, then upload your first file.</p>
+        <div class="auth-tabs">
+          <button class="btn btn-primary" type="button" data-auth-tab="signin">Sign in</button>
+          <button class="btn btn-ghost" type="button" data-auth-tab="register">Register</button>
+        </div>
+        <form data-signin>
+          <label for="signin-email">Email</label>
+          <input id="signin-email" name="email" type="email" required autocomplete="email" />
+          <label for="signin-password">Password</label>
+          <input id="signin-password" name="password" type="password" required autocomplete="current-password" />
+          <p><button class="btn btn-primary" type="submit">Sign in</button></p>
+        </form>
+        <form data-register hidden>
+          <label for="reg-name">Name</label>
+          <input id="reg-name" name="name" type="text" autocomplete="name" />
+          <label for="reg-email">Email</label>
+          <input id="reg-email" name="email" type="email" required autocomplete="email" />
+          <label for="reg-password">Password</label>
+          <input id="reg-password" name="password" type="password" required minlength="6" autocomplete="new-password" />
+          <p><button class="btn btn-primary" type="submit">Create account</button></p>
+        </form>
+        <p><button class="btn btn-ghost" type="button" data-google>Continue with Google</button></p>
+      </aside>
+    </main>
+
+    <footer class="site-footer">LearnKit stores your files in your own Firebase project.</footer>
+    <script type="module" src="js/auth.js"></script>
+  </body>
+</html>
